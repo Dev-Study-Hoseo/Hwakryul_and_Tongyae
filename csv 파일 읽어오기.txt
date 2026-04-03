@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+y = np.arange(3)
+years = ['2010', '2011', '2012']
+domestic = [6801, 7695, 8010]
+foreign = [777, 1046, 1681]
+
+plt.barh(y, foreign, height=0.25)
+plt.barh(y + 0.3,domestic , height=0.25)
+
+plt.yticks(y, years)
+
+
+# sklearn 라이브러리에서 iris 데이터셋을 불러오는 함수 import
+from sklearn.datasets import load_iris
+
+# 데이터 처리를 위한 pandas 라이브러리 import
+import pandas as pd
+
+# iris 데이터셋 로드 (딕셔너리 형태로 반환됨)
+iris = load_iris()
+
+# iris 데이터 중 feature(꽃의 길이, 너비 등)를 DataFrame으로 변환
+# columns는 각 feature의 이름을 지정
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+# target(품종 번호)을 새로운 열로 추가
+df['target'] = iris.target
+
+# DataFrame을 CSV 파일로 저장
+# index=False → 행 번호(인덱스)는 저장하지 않음
+df.to_csv('iris.csv', index=False)
+
+
+import pandas as pd
+
+df = pd.read_csv('/content/iris.csv')
+df.head()
